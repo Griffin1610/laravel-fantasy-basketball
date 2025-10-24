@@ -18,7 +18,7 @@ class PlayerController extends Controller
     }
     $players = $query->get();
     return view('players.index', compact('players', 'sort'));
-}
+    }
 
 
     public function create()
@@ -29,15 +29,14 @@ class PlayerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            //using regex for player and team to satisy requirement and stop invalid player names
             'Player' => ['required', 'string', 'max:100', 'regex:/^[a-zA-Z\s\.\'-]+$/'],
             'Age' => 'nullable|integer',
             'Tm' => ['nullable', 'regex:/^[A-Z]{2,5}$/'],
             'Pos' => 'nullable|string|max:5',
             'MP' => 'nullable|numeric',
             'FG_percent' => 'nullable|numeric',
-            '3P_percent' => 'nullable|numeric',
-            '2P_percent' => 'nullable|numeric',
+            'P3_percent' => 'nullable|numeric',
+            'P2_percent' => 'nullable|numeric',
             'FT_percent' => 'nullable|numeric',
             'TRB' => 'nullable|numeric',
             'AST' => 'nullable|numeric',
@@ -45,12 +44,11 @@ class PlayerController extends Controller
             'BLK' => 'nullable|numeric',
             'PTS' => 'nullable|numeric',
         ]);
-        Player::create($request->except('_token'));
-
-Player::create($request->except('_token'));
-
-
-        Player::create($request->all());
+    
+        Player::create($request->only([
+        'Player','Age','Tm','Pos','MP','FG_percent','P3','P3A','P3_percent',
+        'P2','P2A','P2_percent','FT_percent','TRB','AST','STL','BLK','PTS'
+        ]));
 
         return redirect()->route('players.index')->with('success', 'Player added!');
     }
@@ -63,7 +61,6 @@ Player::create($request->except('_token'));
     public function update(Request $request, Player $player)
     {
         $request->validate([
-            //changed to regex expression for requirements and stop invalid player names
             'Player' => ['required', 'string', 'max:100', 'regex:/^[a-zA-Z\s\.\'-]+$/'],
             'PTS' => 'required|numeric',
         ]);

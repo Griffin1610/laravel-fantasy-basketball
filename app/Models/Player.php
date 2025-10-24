@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Player extends Model
 {
     //
-    protected $table = 'nbastats';
+    protected $table = 'players';
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $keyType = 'int';

@@ -42,8 +42,8 @@
                     <td class="border px-2 py-1">{{ $player->Tm }}</td>
                     <td class="border px-2 py-1">{{ $player->MP }}</td>
                     <td class="border px-2 py-1">{{ $player->FG_percent }}</td>
-                    <td class="border px-2 py-1">{{ $player['3P_percent']}}</td>
-                    <td class="border px-2 py-1">{{ $player['2P_percent'] }}</td>
+                    <td class="border px-2 py-1">{{ $player['P3_percent']}}</td>
+                    <td class="border px-2 py-1">{{ $player['P2_percent'] }}</td>
                     <td class="border px-2 py-1">{{ $player->FT_percent }}</td>
                     <td class="border px-2 py-1">{{ $player->TRB }}</td>
                     <td class="border px-2 py-1">{{ $player->AST }}</td>
