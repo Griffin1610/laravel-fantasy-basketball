@@ -62,7 +62,7 @@
                 <form action="{{ route('players.destroy', $player) }}" method="POST" class="inline">
                      @csrf
                     @method('DELETE')
-                <button type="submit" class="text-red-600" onclick="return confirm('Are you sure?')">Delete</butto>
+                <button type="submit" class="text-red-600" onclick="return confirm('Are you sure?')">Delete</button>
         </form>
         </td>
         </tr>
