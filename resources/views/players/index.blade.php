@@ -7,7 +7,6 @@
         <div class="mb-4 text-green-600">{{ session('success') }}</div>
     @endif
 
-    <a href="{{ route('players.create') }}" class="text-blue-500 underline mb-4 inline-block">Add New Players </a>
     <form method="GET" action="{{ route('players.index') }}" class="mb-4">
             <label for="sort" class="mr-2">Sort by:</label>
             <select name="sort" id="sort" onchange="this.form.submit()" class="border rounded px-2 py-1 !bg-grey text-black">
@@ -32,7 +31,7 @@
                 <th class="border px-2 py-1">STL</th>
                 <th class="border px-2 py-1">BLK</th>
                 <th class="border px-2 py-1">PTS</th>
-                <th class="border px-2 py-1">Actions</th>
+                <th class="border px-2 py-1">Add</th>
             </tr>
           </thead>
         <tbody>
@@ -51,19 +50,11 @@
                     <td class="border px-2 py-1">{{ $player->BLK }}</td>
                     <td class="border px-2 py-1">{{ $player->PTS }}</td>
                     <td class="border px-2 py-1">
-                    <a href="{{ route('players.edit', $player) }}" class="text-blue-600">Edit</a>
-
                 <form action="{{ route('team.add', $player->id) }}" method="POST" class="inline">
                     @csrf
                     <input type="hidden" name="sort" value="{{ request('sort') }}">
                     <button type="submit" class="text-green-600">Add</button>
                 </form>
-
-                <form action="{{ route('players.destroy', $player) }}" method="POST" class="inline">
-                     @csrf
-                    @method('DELETE')
-                <button type="submit" class="text-red-600" onclick="return confirm('Are you sure?')">Delete</button>
-        </form>
         </td>
         </tr>
         @endforeach

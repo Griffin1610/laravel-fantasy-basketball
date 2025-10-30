@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
-    public function add($id)
+    public function add(Request $request, $id)
    {
     // Limit a max 5 players to a team
     if (TeamPlayer::count() >= 5) {
@@ -16,11 +16,13 @@ class TeamController extends Controller
     }
 
     // Prevent duplicate players from joining
-    if (!TeamPlayer::where('player_id', $id)->exists()) {
-        TeamPlayer::create(['player_id' => $id]);
+    // Convert id to string to match TEXT type in SQLite
+    $playerId = (string) $id;
+    if (!TeamPlayer::where('player_id', $playerId)->exists()) {
+        TeamPlayer::create(['player_id' => $playerId]);
     }
 
-    return redirect()->route('players.index', ['sort' => request('sort')])
+    return redirect()->route('players.index', ['sort' => $request->input('sort')])
     ->with('success', 'Player added to team.');
 
 }

@@ -10,7 +10,7 @@ class Player extends Model
     protected $table = 'players';
     protected $primaryKey = 'id';
     public $incrementing = true;
-    public $keyType = 'int';
+    public $keyType = 'string'; // Changed to string to match SQLite TEXT type
     public $timestamps = false;
 
     protected $fillable = [

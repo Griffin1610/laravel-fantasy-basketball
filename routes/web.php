@@ -5,7 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
-Route::resource('players', PlayerController::class);
+Route::get('players', [PlayerController::class, 'index'])->name('players.index');
 Route::post('/team/add/{id}', [TeamController::class, 'add'])->name('team.add');
 Route::get('/team', [TeamController::class, 'index'])->name('team.index');
 Route::delete('/team/remove/{id}', [TeamController::class, 'remove'])->name('team.remove');

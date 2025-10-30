@@ -31,28 +31,29 @@
                 </thead>
                 <tbody>
                     @foreach($teamPlayers as $tp)
-                        @php $player = $tp->player; @endphp
+                        @if($tp->player)
                         <tr>
-                            <td class="border px-2 py-1">{{ $player->Player }}</td>
-                            <td class="border px-2 py-1">{{ $player->Tm }}</td>
-                            <td class="border px-2 py-1">{{ $player->MP }}</td>
-                            <td class="border px-2 py-1">{{ $player->FG_percent }}</td>
-                            <td class="border px-2 py-1">{{ $player['3P_percent'] }}</td>
-                            <td class="border px-2 py-1">{{ $player['2P_percent'] }}</td>
-                            <td class="border px-2 py-1">{{ $player->FT_percent }}</td>
-                            <td class="border px-2 py-1">{{ $player->TRB }}</td>
-                            <td class="border px-2 py-1">{{ $player->AST }}</td>
-                            <td class="border px-2 py-1">{{ $player->STL }}</td>
-                            <td class="border px-2 py-1">{{ $player->BLK }}</td>
-                            <td class="border px-2 py-1">{{ $player->PTS }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player->Player }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player->Tm }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player->MP }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player->FG_percent }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player['P3_percent'] }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player['P2_percent'] }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player->FT_percent }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player->TRB }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player->AST }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player->STL }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player->BLK }}</td>
+                            <td class="border px-2 py-1">{{ $tp->player->PTS }}</td>
                             <td class="border px-2 py-1">
-                            <form action="{{ route('team.remove', $player->id) }}" method="POST" class="inline">
+                            <form action="{{ route('team.remove', $tp->player->id) }}" method="POST" class="inline">
                                 @csrf
                             @method('DELETE')
                              <button type="submit" class="text-red-600">Remove</button>
                             </form>
                         </td>
                         </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
