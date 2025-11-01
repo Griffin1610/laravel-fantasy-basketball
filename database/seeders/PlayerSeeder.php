@@ -28,12 +28,10 @@ class PlayerSeeder extends Seeder
             return;
         }
 
-        // Skip header row
         $header = fgetcsv($handle);
         
         $count = 0;
         while (($data = fgetcsv($handle)) !== false) {
-            // Map CSV columns to database columns
             $playerData = [
                 'Rk' => isset($data[0]) && $data[0] !== '' ? (int)$data[0] : null,
                 'Player' => $data[1] ?? null,
@@ -67,19 +65,20 @@ class PlayerSeeder extends Seeder
                 'PTS' => isset($data[29]) && $data[29] !== '' ? (float)$data[29] : null,
             ];
 
-            // Only insert if Player name exists
             if (!empty($playerData['Player'])) {
-                // Use updateOrCreate to handle duplicates
-                Player::updateOrCreate(
-                    ['Player' => $playerData['Player'], 'Tm' => $playerData['Tm']],
-                    $playerData
-                );
-                $count++;
+                $existing = Player::where('Player', $playerData['Player'])->first();
+                
+                if ($existing) {
+                    if (($playerData['PTS'] ?? 0) > ($existing->PTS ?? 0)) {
+                        $existing->update($playerData);
+                    }
+                } else {
+                    Player::create($playerData);
+                    $count++;
+                }
             }
         }
-
         fclose($handle);
-        
         $this->command->info("Imported {$count} players from CSV.");
     }
 }
