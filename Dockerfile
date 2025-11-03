@@ -15,8 +15,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy project files
 COPY . .
-COPY .env.docker .env
-
 
 # Ensure SQLite databases exist
 RUN mkdir -p database && \
@@ -27,19 +25,20 @@ RUN mkdir -p database && \
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Clear Laravel caches (safe before build)
+# Clear old Laravel caches
 RUN php artisan config:clear && \
     php artisan view:clear && \
     php artisan route:clear
 
-# Build Vite assets
+# Set APP_URL from Render environment
 ARG APP_URL
 ENV APP_URL=${APP_URL}
+
+# Build Vite assets
 RUN npm install && npm run build
 
 # Fix permissions for Laravel and public assets
-RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 storage bootstrap/cache public/build
+RUN chmod -R 755 storage bootstrap/cache public/build
 
 # Expose port
 EXPOSE 8080
