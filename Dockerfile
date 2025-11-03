@@ -16,13 +16,16 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy project files
 COPY . .
 
-# Ensure SQLite file exists for discovery
-RUN mkdir -p database && touch database/database.sqlite
+# Ensure SQLite files exist for build
+RUN mkdir -p database && \
+    touch database/database.sqlite && \
+    touch database/players.sqlite && \
+    touch database/auth.sqlite
 
-# Copy Docker-specific .env
+# Copy Docker-specific .env for build
 COPY .env.docker .env
 
-# Install PHP dependencies
+# Install PHP dependencies (package:discover will succeed now)
 RUN composer install --no-dev --optimize-autoloader
 
 # Install Node dependencies & build Vite assets
