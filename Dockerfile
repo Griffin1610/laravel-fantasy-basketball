@@ -6,8 +6,9 @@ WORKDIR /var/www/html
 
 # Install system dependencies for Laravel + SQLite + Node
 RUN apt-get update && apt-get install -y \
-    git unzip libzip-dev sqlite3 curl \
-    nodejs npm && docker-php-ext-install pdo_sqlite
+    git unzip libzip-dev libsqlite3-dev pkg-config curl \
+    nodejs npm \
+ && docker-php-ext-install pdo_sqlite
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
