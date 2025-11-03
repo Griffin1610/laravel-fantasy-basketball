@@ -22,6 +22,8 @@ RUN mkdir -p database && \
     touch database/players.sqlite && \
     touch database/auth.sqlite
 
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
 # Clear old Laravel caches
 RUN php artisan config:clear
 RUN php artisan view:clear
@@ -31,9 +33,6 @@ RUN php artisan cache:clear
 # Set APP_URL for Vite build
 ARG APP_URL
 ENV APP_URL=$APP_URL
-
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
 
 # Install Node dependencies (production only) & build Vite assets
 RUN npm ci --omit=dev
