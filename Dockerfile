@@ -22,16 +22,22 @@ RUN mkdir -p database && \
     touch database/players.sqlite && \
     touch database/auth.sqlite
 
+# Set APP_URL from Render environment **before building assets**
+ARG APP_URL
+ENV APP_URL=${APP_URL}
+
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Clear old Laravel caches
+# Clear Laravel caches
 RUN php artisan config:clear && \
-    php artisan view:clear && \
-    php artisan route:clear
+    php artisan cache:clear && \
+    php artisan route:clear && \
+    php artisan view:clear
 
-# Build Vite assets
-RUN npm install && npm run build
+# Install Node dependencies & build Vite assets
+RUN npm install
+RUN npm run build
 
 # Fix permissions for Laravel and public assets
 RUN chmod -R 755 storage bootstrap/cache public/build
