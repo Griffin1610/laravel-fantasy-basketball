@@ -16,6 +16,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy project files
 COPY . .
 
+# Ensure SQLite database files exist
+RUN mkdir -p database && \
+    touch database/players.sqlite && \
+    touch database/auth.sqlite
+
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
