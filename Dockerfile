@@ -31,7 +31,6 @@ RUN composer install --no-dev --optimize-autoloader
 
 # Clear Laravel caches
 RUN php artisan config:clear && \
-    php artisan cache:clear && \
     php artisan route:clear && \
     php artisan view:clear
 
