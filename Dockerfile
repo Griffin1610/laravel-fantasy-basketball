@@ -22,9 +22,6 @@ RUN mkdir -p database && \
     touch database/players.sqlite && \
     touch database/auth.sqlite
 
-# Copy Docker-specific .env for build
-COPY .env.docker .env
-
 # Install PHP dependencies (package:discover will succeed now)
 RUN composer install --no-dev --optimize-autoloader
 
