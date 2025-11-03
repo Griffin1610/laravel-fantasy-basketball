@@ -34,7 +34,7 @@ ARG APP_URL
 ENV APP_URL=$APP_URL
 
 # Install Node dependencies (production only) & build Vite assets
-RUN npm ci --omit=dev
+RUN npm install
 RUN npm run build
 
 # Fix permissions for public/build
