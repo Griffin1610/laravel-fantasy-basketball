@@ -15,6 +15,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy project files
 COPY . .
+COPY .env.docker .env
+
 
 # Ensure SQLite databases exist
 RUN mkdir -p database && \
