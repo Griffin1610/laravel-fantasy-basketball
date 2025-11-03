@@ -30,10 +30,6 @@ RUN php artisan config:clear && \
     php artisan view:clear && \
     php artisan route:clear
 
-# Set APP_URL from Render environment
-ARG APP_URL
-ENV APP_URL=${APP_URL}
-
 # Build Vite assets
 RUN npm install && npm run build
 
