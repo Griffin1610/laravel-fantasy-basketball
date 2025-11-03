@@ -28,7 +28,6 @@ RUN composer install --no-dev --optimize-autoloader
 RUN php artisan config:clear
 RUN php artisan view:clear
 RUN php artisan route:clear
-RUN php artisan cache:clear
 
 # Set APP_URL for Vite build
 ARG APP_URL
