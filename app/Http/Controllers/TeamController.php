@@ -94,12 +94,12 @@ class TeamController extends Controller
 
 
     $playoffResult = match (true) {
-        $wins >= 65 => ['NBA Finals', '🏆 Championship contender with elite talent'],
-        $wins >= 58 => ['Conference Finals', '🌟 Strong playoff team with great chemistry'],
-        $wins >= 52 => ['Playoffs - 2nd Round', '✅ Solid playoff team'],
-        $wins >= 45 => ['Playoffs - 1st Round', '📈 Making the playoffs'],
-        $wins >= 38 => ['Play-In Tournament', '🎯 On the bubble'],
-        default => ['Missed Playoffs', '📉 Needs improvement']
+        $wins >= 65 => ['NBA Finals', 'Championship contender with elite talent'],
+        $wins >= 58 => ['Conference Finals', 'Strong playoff team with great chemistry'],
+        $wins >= 52 => ['Playoffs - 2nd Round', 'Solid playoff team'],
+        $wins >= 45 => ['Playoffs - 1st Round', 'Making the playoffs'],
+        $wins >= 38 => ['Play-In Tournament', 'On the bubble'],
+        default => ['Missed Playoffs', 'Needs improvement']
     };
 
     // Calculate team strengths

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Player;
+use App\Models\TeamPlayer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -27,6 +28,8 @@ class PlayerController extends Controller
     }
     
     $players = $query->get();
-    return view('players.index', compact('players', 'sort', 'search'));
+    $teamPlayerCount = TeamPlayer::count();
+    
+    return view('players.index', compact('players', 'sort', 'search', 'teamPlayerCount'));
     }
 }

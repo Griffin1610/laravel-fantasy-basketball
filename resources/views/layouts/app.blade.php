@@ -9,20 +9,20 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-[#0a0a0a] text-[#EDEDEC]">
         <div>
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white shadow">
+                <header class="bg-[#1a1a1a] shadow border-b border-gray-800">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -30,7 +30,7 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="bg-[#0a0a0a] text-[#EDEDEC]">
                 {{ $slot }}
             </main>
         </div>
