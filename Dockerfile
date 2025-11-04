@@ -33,7 +33,9 @@ RUN php artisan config:clear || true && \
 # Remove old builds and node_modules to ensure fresh assets
 RUN rm -rf node_modules package-lock.json public/build
 
+# Set environment variables for production
 ARG APP_URL=https://laravel-fantasy-basketball.onrender.com
+ENV APP_ENV=production
 ENV APP_URL=${APP_URL}
 ENV VITE_APP_URL=${APP_URL}
 
