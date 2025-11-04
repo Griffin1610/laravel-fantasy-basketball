@@ -22,20 +22,22 @@ RUN mkdir -p database && \
     touch database/players.sqlite && \
     touch database/auth.sqlite
 
-# Set APP_URL from Render environment **before building assets**
-ENV APP_URL=https://laravel-fantasy-basketball.onrender.com
-
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Clear Laravel caches
-RUN php artisan config:clear && \
-    php artisan route:clear && \
-    php artisan view:clear
+# Clear Laravel caches safely
+RUN php artisan config:clear || true && \
+    php artisan route:clear || true && \
+    php artisan view:clear || true
+
+# Remove old builds and node_modules to ensure fresh assets
+RUN rm -rf node_modules package-lock.json public/build
+
+ARG APP_URL=https://laravel-fantasy-basketball.onrender.com
+ENV APP_URL=${APP_URL}
 
 # Install Node dependencies & build Vite assets
-RUN npm install
-RUN npm run build
+RUN npm install && npm run build
 
 # Fix permissions for Laravel and public assets
 RUN chmod -R 755 storage bootstrap/cache public/build
