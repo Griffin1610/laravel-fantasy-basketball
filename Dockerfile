@@ -35,6 +35,7 @@ RUN rm -rf node_modules package-lock.json public/build
 
 ARG APP_URL=https://laravel-fantasy-basketball.onrender.com
 ENV APP_URL=${APP_URL}
+ENV VITE_APP_URL=${APP_URL}
 
 # Install Node dependencies & build Vite assets
 RUN npm install && npm run build
