@@ -23,8 +23,7 @@ RUN mkdir -p database && \
     touch database/auth.sqlite
 
 # Set APP_URL from Render environment **before building assets**
-ARG APP_URL
-ENV APP_URL=${APP_URL}
+ENV APP_URL=https://laravel-fantasy-basketball.onrender.com
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
