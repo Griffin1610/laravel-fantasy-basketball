@@ -7,16 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Player extends Model
 {
     //
-    protected $table = 'nbastats';
+    protected $table = 'players';
     protected $primaryKey = 'id';
     public $incrementing = true;
-    public $keyType = 'int';
+    public $keyType = 'string'; // Changed to string to match SQLite TEXT type
     public $timestamps = false;
 
     protected $fillable = [
-    'Player', 'Age', 'Tm', 'Pos', 'MP', 'FG_percent',
-    '3P_percent', '2P_percent', 'FT_percent', 'TRB',
-    'AST', 'STL', 'BLK', 'PTS'
-];
+        'Rk', 'Player', 'Pos', 'Age', 'Tm', 'G', 'GS', 'MP',
+        'FG', 'FGA', 'FG_percent', 'P3', 'P3A', 'P3_percent',
+        'P2', 'P2A', 'P2_percent', 'eFG_percent', 'FT', 'FTA',
+        'FT_percent', 'ORB', 'DRB', 'TRB', 'AST', 'STL', 'BLK',
+        'TOV', 'PF', 'PTS'
+    ];
 
 }

@@ -1,0 +1,7 @@
+vendor/
+node_modules/
+.env
+.env.local
+.env.*
+public/build
+public/hot

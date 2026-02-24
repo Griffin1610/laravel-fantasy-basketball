@@ -42,6 +42,13 @@ return [
             'synchronous' => null,
         ],
 
+        'auth' => [
+            'driver' => 'sqlite',
+            'database' => env('AUTH_DB_DATABASE', database_path('auth.sqlite')),
+            'prefix' => '',
+            'foreign_key_constraints' => true,
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DB_URL'),
